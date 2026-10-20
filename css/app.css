@@ -1,0 +1,1455 @@
+/* İstanbul Cevahir AVM Navigasyon - Modern Stiller */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --navy: #101a3a;
+  --accent: #e0a526;
+  --accent-ink: #2a1c00;
+  --route: #2563ff;
+  --route-2: #19c3ff;
+  --ok: #17b978;
+  --bg: #080c1a;
+  --bg-2: #0e1530;
+  --surface: #121934d6;
+  --surface-solid: #131b38;
+  --ink: #eef1fb;
+  --ink-2: #aab3d0;
+  --ink-3: #6f7a9e;
+  --line: rgba(255, 255, 255, 0.1);
+  --chip: rgba(255, 255, 255, 0.08);
+  --shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --slab: #1b2445;
+  --slab-shadow: #04060f;
+  --void: #0b1024;
+  --core: #2a3358;
+  --core-wall: #161d3a;
+  --vacant: #232c50;
+  --room-stroke: rgba(255, 255, 255, 0.22);
+  --label: #f3f5ff;
+  --label-halo: rgba(8, 12, 26, 0.85);
+  --mix: #0d1330;
+  --mix-amount: 46%;
+  --cart-frame: #f4f6ff;
+  --cart-fill: #ffc93c;
+  
+  --primary: #c41230;
+  --primary-glow: rgba(196, 18, 48, 0.35);
+  --glass-bg: rgba(18, 25, 52, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+/* Light Mode / Aydınlık Mod */
+html:not(.dark) {
+  --bg: #e9edf5;
+  --bg-2: #dfe5f1;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-solid: #ffffff;
+  --ink: #111831;
+  --ink-2: #4c5673;
+  --ink-3: #8790aa;
+  --line: rgba(16, 26, 58, 0.1);
+  --chip: rgba(16, 26, 58, 0.06);
+  --shadow: 0 18px 50px -18px rgba(16, 26, 58, 0.35), 0 2px 8px rgba(16, 26, 58, 0.06);
+  --slab: #fdfcf9;
+  --slab-shadow: #b9c1d6;
+  --void: #dfe5f1;
+  --core: #d3d7e2;
+  --core-wall: #b3b9c9;
+  --vacant: #e6e8ef;
+  --room-stroke: rgba(16, 26, 58, 0.28);
+  --label: #1c2547;
+  --label-halo: rgba(255, 255, 255, 0.9);
+  --mix: #ffffff;
+  --mix-amount: 0%;
+  --cart-frame: #101a3a;
+  --cart-fill: #ffd25e;
+  
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+html:not(.dark) body {
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+html:not(.dark) .brand-marker-pill {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+html:not(.dark) .brand-marker.is-anchor .brand-marker-pill {
+  border-color: rgba(217, 119, 6, 0.6);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.15);
+}
+
+html:not(.dark) .brand-name-text {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+html:not(.dark) .brand-marker:hover .brand-marker-pill {
+  border-color: #0284c7;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
+}
+
+html:not(.dark) .glass-panel {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
+html:not(.dark) .glass-card {
+  background: rgba(248, 250, 252, 0.9);
+  border-color: var(--line);
+}
+
+html:not(.dark) .route-line-bg,
+html:not(.dark) .route__case {
+  stroke: #ffffff !important;
+}
+
+html:not(.dark) .route-line-main,
+html:not(.dark) .route__line {
+  stroke: var(--route) !important;
+  filter: drop-shadow(0 0 6px rgba(37, 99, 255, 0.4));
+}
+
+html:not(.dark) .route__glow {
+  stroke: #60a5fa !important;
+  opacity: 0.25 !important;
+}
+
+html:not(.dark) .route__flow {
+  stroke: #ffffff !important;
+}
+
+html:not(.dark) .floor-pill {
+  color: #475569;
+}
+
+html:not(.dark) .floor-pill:hover {
+  background: rgba(226, 232, 240, 0.8);
+  color: #0f172a;
+}
+
+html:not(.dark) .floor-pill.active {
+  color: #ffffff;
+}
+
+html:not(.dark) .floor-transition-banner {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: #0891b2;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(6, 182, 212, 0.3);
+}
+
+html:not(.dark) .floor-transition-banner div.font-heading {
+  color: #0f172a;
+}
+
+/* Light Mode Utility Overrides */
+html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-900\/90 {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+html:not(.dark) .bg-slate-800,
+html:not(.dark) .bg-slate-800\/80,
+html:not(.dark) .bg-slate-800\/50,
+html:not(.dark) .bg-slate-800\/40 {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+}
+
+html:not(.dark) .hover\:bg-slate-700:hover,
+html:not(.dark) .hover\:bg-slate-700\/80:hover,
+html:not(.dark) .hover\:bg-slate-800:hover,
+html:not(.dark) .hover\:bg-slate-800\/80:hover {
+  background-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .border-slate-700,
+html:not(.dark) .border-slate-700\/80,
+html:not(.dark) .border-slate-700\/70,
+html:not(.dark) .border-slate-700\/60,
+html:not(.dark) .border-slate-700\/50,
+html:not(.dark) .border-slate-700\/40,
+html:not(.dark) .border-slate-800,
+html:not(.dark) .border-slate-800\/80,
+html:not(.dark) .border-slate-800\/60 {
+  border-color: rgba(203, 213, 225, 0.85) !important;
+}
+
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-slate-200,
+html:not(.dark) h1, 
+html:not(.dark) h2, 
+html:not(.dark) h3 {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-slate-300,
+html:not(.dark) .text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Ensure buttons with explicit white text remain white */
+html:not(.dark) .bg-red-600,
+html:not(.dark) .bg-red-600 *,
+html:not(.dark) .bg-red-700 *,
+html:not(.dark) .bg-gradient-to-r.from-red-600 *,
+html:not(.dark) .bg-cyan-600,
+html:not(.dark) .floor-pill.active,
+html:not(.dark) .floor-pill.active *,
+html:not(.dark) .category-chip.active,
+html:not(.dark) .category-chip.active * {
+  color: #ffffff !important;
+}
+
+html:not(.dark) #sim-play-btn,
+html:not(.dark) #sim-play-btn * {
+  color: #0f172a !important;
+}
+
+html:not(.dark) #search-input,
+html:not(.dark) #drawer-search-input,
+html:not(.dark) #picker-search-input {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+
+h1, h2, h3, .font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* SVG Floor Map Styles (cevahir-rehber.web.app uyarlaması) */
+#svg-container, .map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  background: radial-gradient(1200px 700px at 70% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%), radial-gradient(900px 700px at 0% 100%, color-mix(in srgb, var(--route) 10%, transparent), transparent 60%), linear-gradient(180deg, var(--bg), var(--bg-2));
+}
+
+#svg-container:active, .map:active {
+  cursor: grabbing;
+}
+
+.map--pick {
+  cursor: crosshair;
+}
+
+/* Floor Watermark (.map__watermark from cevahir-rehber) */
+.map__watermark {
+  color: var(--ink);
+  opacity: .05;
+  pointer-events: none;
+  font-size: min(58vh, 46vw);
+  font-weight: 800;
+  line-height: 1;
+  animation: .7s cubic-bezier(.2, .8, .2, 1) wm;
+  position: absolute;
+  bottom: -4vh;
+  right: 5vw;
+  user-select: none;
+  z-index: 1;
+}
+
+@keyframes wm {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: .05; transform: translateY(0) scale(1); }
+}
+
+#map-svg, #map-svg-element, .map__svg {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  display: block;
+}
+
+.map__svg path, .map__svg polyline {
+  vector-effect: non-scaling-stroke;
+}
+
+/* SVG içindeki ham Inkscape debug metinlerini ve karmaşık yazıları kesinlikle gizle */
+#map-svg-element text, 
+#map-svg-element tspan, 
+#Writing, 
+[id*="Writing"], 
+[id*="writing"], 
+[id^="text"],
+g[inkscape\:label*="Writing"],
+g[inkscape\:label*="writing"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Architectural & Store Polygons (.slab, .room from cevahir-rehber) */
+.slab, .corridor-path, #Walking path, #walking path, g[id*="Walking"] path, g[id*="walking"] path {
+  fill: var(--slab) !important;
+  stroke: var(--room-stroke) !important;
+  stroke-width: 1px !important;
+}
+
+.slab-shadow {
+  fill: var(--slab-shadow) !important;
+  opacity: .55;
+}
+
+.void {
+  fill: var(--void) !important;
+  stroke: var(--room-stroke) !important;
+  stroke-width: .8px !important;
+}
+
+.room-wall {
+  fill: var(--core-wall) !important;
+  stroke: var(--core-wall) !important;
+  stroke-width: 1px !important;
+  stroke-linejoin: round !important;
+}
+
+.room, .store-polygon {
+  fill: var(--core);
+  stroke: var(--room-stroke);
+  stroke-width: .9px;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill .25s ease, stroke .25s ease, opacity .25s ease, filter .25s ease;
+}
+
+.room--tenant, .store-polygon {
+  fill: color-mix(in srgb, var(--c, #cfd6e4) calc(100% - var(--mix-amount)), var(--mix)) !important;
+}
+
+.room--tenant:hover, .store-polygon:hover {
+  fill: color-mix(in srgb, var(--c, #cfd6e4) calc(100% - var(--mix-amount) / 2), #fff 22%) !important;
+  stroke: var(--accent) !important;
+  stroke-width: 2.2px !important;
+  filter: brightness(1.15);
+}
+
+.store-polygon.active-target, .room--on {
+  stroke: #ef4444 !important;
+  stroke-width: 3.5px !important;
+  animation: pulseTarget 1.6s infinite ease-in-out;
+}
+
+.store-polygon.active-start {
+  stroke: var(--ok) !important;
+  stroke-width: 3.5px !important;
+  animation: pulseStart 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseTarget {
+  0%, 100% { stroke-width: 3.5px; filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.7)); }
+  50% { stroke-width: 5px; filter: drop-shadow(0 0 20px rgba(239, 68, 68, 1)); }
+}
+
+@keyframes pulseStart {
+  0%, 100% { stroke-width: 3.5px; filter: drop-shadow(0 0 8px rgba(23, 185, 120, 0.7)); }
+  50% { stroke-width: 5px; filter: drop-shadow(0 0 20px rgba(23, 185, 120, 1)); }
+}
+
+/* Category Color Tokens from cevahir-rehber */
+.g-moda, .cat-fashion { --c: #f9bfd3; --cw: #d98aa6; }
+.g-ayakkabi { --c: #f6cfa4; --cw: #cf9c63; }
+.g-spor, .cat-sports { --c: #b5e6c4; --cw: #74bd8d; }
+.g-elektronik, .cat-tech { --c: #b4d3fb; --cw: #6f9fdd; }
+.g-ev, .cat-home { --c: #d6c8f7; --cw: #9f89da; }
+.g-kozmetik, .cat-cosmetics { --c: #f7bdec; --cw: #d07fc0; }
+.g-aksesuar { --c: #f8e39b; --cw: #cfb04d; }
+.g-cocuk, .cat-entertainment { --c: #b6ecf0; --cw: #6cbfc7; }
+.g-yeme, .cat-food { --c: #ffc9a3; --cw: #e08e57; }
+.g-hizmet, .cat-service, .cat-atm, .cat-wc { --c: #cfd6e4; --cw: #98a3bb; }
+
+.water-feature {
+  fill: #38bdf8 !important;
+  fill-opacity: 0.45;
+  stroke: #0284c7;
+  animation: waterGleam 4s infinite ease-in-out;
+}
+
+@keyframes waterGleam {
+  0%, 100% { fill-opacity: 0.45; }
+  50% { fill-opacity: 0.7; }
+}
+
+/* Logo Tile Markers directly on Map Units (cevahir-rehber.web.app style) */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.logo-tile-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 20;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0.1s, opacity 0.25s ease;
+}
+
+.logo-tile-marker.is-secondary {
+  animation: fadeInScale 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo-tile-marker:hover {
+  transform: translate(-50%, -50%) scale(1.22);
+  z-index: 60 !important;
+}
+
+.logo-tile-marker.is-active {
+  transform: translate(-50%, -50%) scale(1.25);
+  z-index: 65 !important;
+}
+
+.logo-tile {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3px;
+  transition: all 0.2s ease;
+}
+
+/* Anchor Stores (Ana Markalar): Daha belirgin, altın rengi çerçeveli ve hafif ışıltılı */
+.logo-tile-marker.is-anchor {
+  z-index: 30;
+}
+
+.logo-tile-marker.is-anchor .logo-tile {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3), 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.logo-tile-marker:hover .logo-tile {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2), 0 0 0 2px #38bdf8;
+}
+
+.logo-tile-marker.is-active .logo-tile {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4), 0 0 0 2.5px #ef4444;
+}
+
+/* Karanlık Mod (Noir) Neon & Kontrast Vurguları */
+html.dark .logo-tile {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 8px rgba(56, 189, 248, 0.2);
+}
+
+html.dark .logo-tile-marker.is-anchor .logo-tile {
+  background: #1e1b4b;
+  border-color: #fbbf24;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8), 0 0 14px rgba(251, 191, 36, 0.45);
+}
+
+html.dark .logo-tile-marker:hover .logo-tile {
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.9), 0 0 16px rgba(56, 189, 248, 0.6);
+}
+
+html.dark .logo-tile-marker.is-active .logo-tile {
+  box-shadow: 0 6px 25px rgba(239, 68, 68, 0.6), 0 0 16px rgba(239, 68, 68, 0.6);
+}
+
+.logo-tile svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Store Cards in 3-Column Grid (cevahir-rehber.web.app style) */
+.store-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  user-select: none;
+}
+
+html.dark .store-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.store-card:hover {
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+html.dark .store-card:hover {
+  border-color: #64748b;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.store-card.is-active {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 6px 20px rgba(239, 68, 68, 0.15);
+}
+
+.store-card__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.store-card:hover .store-card__logo {
+  transform: scale(1.06);
+}
+
+.store-card__logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.store-card__name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  margin-bottom: 2px;
+}
+
+html.dark .store-card__name {
+  color: #f8fafc;
+}
+
+.store-card__floor {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Brand Logo Badges on Map - Clean Modern LOD Pills */
+.brand-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  z-index: 20;
+}
+
+.brand-marker.is-anchor {
+  z-index: 30;
+}
+
+.brand-marker.is-secondary {
+  z-index: 20;
+  opacity: 0.95;
+}
+
+.brand-marker:hover {
+  transform: translate(-50%, -55%) scale(1.15);
+  z-index: 60 !important;
+}
+
+.brand-marker-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.94);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+  border-radius: 9999px;
+  padding: 3px 8px 3px 3px;
+  transition: all 0.2s ease;
+}
+
+.brand-marker.is-anchor .brand-marker-pill {
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+.brand-marker:hover .brand-marker-pill {
+  border-color: #38bdf8;
+  background: rgba(15, 23, 42, 1);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.45);
+}
+
+.brand-logo-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.brand-logo-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brand-name-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Escalator & Elevator Portal Badges */
+.portal-pill {
+  border-radius: 9999px;
+  padding: 2.5px 7px 2.5px 5px;
+  gap: 4px;
+}
+
+.portal-stairs {
+  border-color: rgba(245, 158, 11, 0.6);
+  background: rgba(15, 23, 42, 0.94);
+}
+
+.portal-elevator {
+  border-color: rgba(6, 182, 212, 0.6);
+  background: rgba(15, 23, 42, 0.94);
+}
+
+.portal-icon {
+  font-size: 12px;
+}
+
+.portal-text {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Low zoom behavior (zoom out) */
+#markers-layer.low-zoom .brand-marker.is-secondary {
+  opacity: 0.45;
+}
+
+#markers-layer.low-zoom .brand-marker.is-secondary .brand-name-text {
+  display: none;
+}
+
+/* Navigation 4-Layer Glowing Neon Route (Inspired by cevahir-rehber.web.app) */
+.route__glow {
+  stroke: #06b6d4;
+  stroke-width: 22px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  opacity: 0.22;
+  filter: blur(4px);
+}
+
+.route__case {
+  stroke: #080c1a;
+  stroke-width: 10px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.route__line {
+  stroke: #0891b2;
+  stroke-width: 5.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.route__flow {
+  stroke: #ffffff;
+  stroke-width: 2.4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 4 14;
+  animation: routeFlow 0.85s linear infinite;
+}
+
+@keyframes routeFlow {
+  to {
+    stroke-dashoffset: -18px;
+  }
+}
+
+/* Fallback / Legacy classes */
+.route-line-bg {
+  stroke: rgba(6, 182, 212, 0.35);
+  stroke-width: 10px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.route-line-main {
+  stroke: #06b6d4;
+  stroke-width: 5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 8 6;
+  animation: routeDash 1.2s linear infinite;
+  filter: drop-shadow(0 0 8px #06b6d4);
+}
+
+@keyframes routeDash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+/* Shopping Cart Navigator Mascot (Inspired by cevahir-rehber.web.app) */
+.cart-avatar {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 70;
+  transition: transform 0.08s linear;
+  --cart-basket-bg: rgba(224, 165, 38, 0.25);
+}
+
+.cart-beacon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 165, 38, 0.45) 0%, rgba(224, 165, 38, 0) 70%);
+  animation: cartPulse 1.6s infinite ease-out;
+}
+
+@keyframes cartPulse {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+}
+
+.cart-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e293b;
+}
+
+html.dark .cart-marker {
+  color: #ffffff;
+}
+
+.cart-rotator-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cart-svg-el {
+  overflow: visible;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+}
+
+/* Ground shadow pulse */
+.cart__shadow {
+  fill: #000000;
+  opacity: 0.35;
+  transform-origin: 0 1.5px;
+  animation: cartShadow 1.8s ease-in-out infinite;
+}
+
+@keyframes cartShadow {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(0.85); opacity: 0.22; }
+}
+
+/* Idle breathing */
+.cart__body {
+  transform-origin: 0 0;
+  animation: cartIdle 2s ease-in-out infinite;
+}
+
+@keyframes cartIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+
+/* Rolling wobble / rattle */
+.cart--rolling .cart__body {
+  animation: cartRattle 0.28s linear infinite !important;
+}
+
+@keyframes cartRattle {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-0.6px, -1.2px) rotate(-1.5deg); }
+  50% { transform: translate(0.6px, 0.5px) rotate(1deg); }
+  75% { transform: translate(-0.4px, -0.6px) rotate(-0.8deg); }
+}
+
+/* Spinning wheels */
+.cart--rolling .cart__wheel-hub {
+  animation: cartWheelSpin 0.35s linear infinite;
+  transform-origin: 0 0;
+}
+
+@keyframes cartWheelSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Floating Floor Header Banner (Inspired by cevahir-rehber.web.app) */
+.floor-header-banner {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(16, 26, 58, 0.88); /* Deep sapphire navy */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(224, 165, 38, 0.35); /* Cevahir gold border */
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(224, 165, 38, 0.15);
+  pointer-events: auto;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html:not(.dark) .floor-header-banner {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(224, 165, 38, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 0 10px rgba(224, 165, 38, 0.1);
+}
+
+.floor-banner-badge {
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #e0a526 0%, #c48b17 100%);
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(224, 165, 38, 0.4);
+}
+
+.floor-banner-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+}
+
+html:not(.dark) .floor-banner-subtitle {
+  color: #1e293b;
+}
+
+/* Amenity Badges on Map (Tuvalet, ATM, Eczane, Mescit, vb.) */
+.amenity-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 28;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.amenity-marker:hover {
+  transform: translate(-50%, -55%) scale(1.14);
+  z-index: 65 !important;
+}
+
+.amenity-marker-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 9999px;
+  padding: 2.5px 8px 2.5px 3.5px;
+  background: rgba(16, 26, 58, 0.94);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+html:not(.dark) .amenity-marker-pill {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.amenity-icon-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #ffffff;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.amenity-badge-wc .amenity-icon-circle { background: linear-gradient(135deg, #0284c7, #0369a1); }
+.amenity-badge-atm .amenity-icon-circle { background: linear-gradient(135deg, #10b981, #047857); }
+.amenity-badge-pharmacy .amenity-icon-circle { background: linear-gradient(135deg, #f43f5e, #be123c); }
+.amenity-badge-infirmary .amenity-icon-circle { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.amenity-badge-baby .amenity-icon-circle { background: linear-gradient(135deg, #ec4899, #be185d); }
+.amenity-badge-prayer .amenity-icon-circle { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+.amenity-badge-info .amenity-icon-circle { background: linear-gradient(135deg, #f59e0b, #b45309); }
+.amenity-badge-taxfree .amenity-icon-circle { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+
+.amenity-label-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+}
+
+html:not(.dark) .amenity-label-text {
+  color: #0f172a;
+}
+
+/* Floor Switcher Bar (.floors from cevahir-rehber) */
+.floors {
+  z-index: 25;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 22px;
+  justify-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  display: grid;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+.floors__title {
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 2px 0 4px;
+  font-size: 9.5px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.floors__btn, .floor-pill {
+  width: 44px;
+  height: 44px;
+  color: var(--ink-2);
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 800;
+  transition: all .25s cubic-bezier(.2, 1.2, .4, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.floors__btn:hover, .floor-pill:hover {
+  background: var(--chip);
+  color: var(--ink);
+}
+
+.floors__btn--on, .floors__btn.active, .floor-pill.active {
+  background: var(--navy) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 18px -10px var(--navy);
+  transform: scale(1.06);
+}
+
+html.dark .floors__btn--on, html.dark .floors__btn.active, html.dark .floor-pill.active {
+  background: var(--accent) !important;
+  color: var(--accent-ink) !important;
+  box-shadow: 0 10px 20px -8px rgba(224, 165, 38, 0.6);
+}
+
+.floors__btn--route:after, .floors__btn.has-route:after, .floor-pill.has-route::after {
+  content: "";
+  background: var(--route);
+  border: 2px solid var(--surface-solid);
+  border-radius: 50%;
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  animation: pulseDot 1.4s infinite;
+}
+
+.floors__btn--sel:after {
+  background: var(--accent);
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+/* Zoom Controls (.zoom from cevahir-rehber) */
+.zoom {
+  z-index: 25;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 16px;
+  display: grid;
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  overflow: hidden;
+}
+
+.zoom button {
+  width: 44px;
+  height: 42px;
+  color: var(--ink-2);
+  place-items: center;
+  transition: all .2s;
+  display: grid;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.zoom button:hover {
+  background: var(--chip);
+  color: var(--ink);
+}
+
+.zoom button + button {
+  border-top: 1px solid var(--line);
+}
+
+/* Floor Hop Badges (.hop from cevahir-rehber) */
+.hop {
+  cursor: pointer;
+  font-family: var(--font);
+  animation: .4s cubic-bezier(.2, 1.4, .4, 1) backwards pop;
+}
+
+.hop rect, .hop path {
+  fill: var(--navy);
+  transition: fill 0.2s ease;
+}
+
+html.dark .hop rect, html.dark .hop path {
+  fill: #162044;
+}
+
+.hop rect {
+  stroke: #ffffff;
+  stroke-width: 2px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+}
+
+.hop text {
+  fill: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.hop:hover rect {
+  fill: var(--route);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Route Pins (.pin from cevahir-rehber) */
+.pin {
+  pointer-events: none;
+}
+
+.pin__dot {
+  fill: var(--route);
+  stroke: #ffffff;
+  stroke-width: 3px;
+}
+
+.pin__pulse {
+  fill: var(--route);
+  opacity: .25;
+  transform-box: fill-box;
+  transform-origin: 50%;
+  animation: 1.8s ease-out infinite pulse;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.45; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.pin--end path {
+  fill: #e2445c;
+  stroke: #ffffff;
+  stroke-width: 2px;
+}
+
+.pin__eye {
+  fill: #ffffff;
+}
+
+.pin__shadow {
+  fill: rgba(0, 0, 0, 0.35);
+}
+
+.pin__drop {
+  animation: .6s cubic-bezier(.3, 1.5, .5, 1) backwards drop, 2.2s ease-in-out .6s infinite bob;
+}
+
+@keyframes drop {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Halo Text Labels (.label__text from cevahir-rehber) */
+.label {
+  pointer-events: none;
+}
+
+.label__text {
+  text-anchor: middle;
+  fill: var(--label);
+  paint-order: stroke;
+  stroke: var(--label-halo);
+  stroke-width: .22em;
+  stroke-linejoin: round;
+  letter-spacing: -.01em;
+  font-weight: 700;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Floor Transition Banner */
+.floor-transition-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid #06b6d4;
+  border-radius: 20px;
+  padding: 24px 36px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.4);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floor-transition-banner.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Floating Compass / North indicator */
+.compass-btn {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .brand-name-text {
+    display: none;
+  }
+  .brand-marker-pill {
+    padding: 3px;
+  }
+}
+
+/* GPS Canlı Konum İşaretleyicisi & Radar Efekti */
+.gps-user-marker {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 45;
+}
+
+.gps-radar-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.2);
+  border: 1.5px solid rgba(59, 130, 246, 0.6);
+  animation: gpsPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.gps-core-dot {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #2563eb;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.8), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.gps-heading-arrow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid #2563eb;
+  filter: drop-shadow(0 -1px 2px rgba(0,0,0,0.3));
+}
+
+@keyframes gpsPulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Amenity Badges (Revir, Güvenlik, Danışma, Otopark, Giriş) */
+.amenity-badge-infirmary > div {
+  background: #fef2f2 !important;
+  border-color: #ef4444 !important;
+  color: #dc2626 !important;
+}
+
+.amenity-badge-info > div {
+  background: #eff6ff !important;
+  border-color: #3b82f6 !important;
+  color: #2563eb !important;
+}
+
+.amenity-badge-carpark > div {
+  background: #f0fdf4 !important;
+  border-color: #10b981 !important;
+  color: #059669 !important;
+}
+
+.amenity-badge-entrance > div,
+.amenity-badge-metro > div {
+  background: #faf5ff !important;
+  border-color: #a855f7 !important;
+  color: #7e22ce !important;
+}
+
+/* ========================================================
+   Modern Noir Toast & Snackbar Notifications
+   ======================================================== */
+.toast-item {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.94);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  color: #f8fafc;
+  animation: toastSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html:not(.dark) .toast-item {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f172a;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.18), 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.toast-item.toast-fade-out {
+  opacity: 0;
+  transform: translateY(-14px) scale(0.94);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast-item.toast-error {
+  border-color: #ef4444;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(239, 68, 68, 0.35);
+}
+
+.toast-item.toast-warning {
+  border-color: #f59e0b;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 158, 11, 0.35);
+}
+
+.toast-item.toast-success {
+  border-color: #10b981;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+.toast-item.toast-info {
+  border-color: #06b6d4;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(6, 182, 212, 0.35);
+}
+

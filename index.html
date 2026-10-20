@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cevahir Rehber - İstanbul Cevahir AVM İnteraktif Harita & Navigasyon</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cevahir: {
+              50: '#fef2f2',
+              100: '#fee2e2',
+              500: '#ef4444',
+              600: '#c41230',
+              700: '#a50e27',
+              800: '#880c20',
+              900: '#5c0816',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="h-screen w-screen overflow-hidden select-none bg-[#eef2f6] text-slate-800 transition-colors duration-200">
+
+  <!-- Ana Uygulama Düzeni: Sol Panel + Sağ Harita Alanı -->
+  <div class="flex h-screen w-screen overflow-hidden p-2.5 sm:p-3 gap-3">
+
+    <!-- SOL PANEL: CEVAHİR REHBER (cevahir-rehber.web.app birebir düzeni) -->
+    <aside id="sidebar-panel" class="w-[350px] lg:w-[380px] h-full flex flex-col bg-white dark:bg-slate-900 rounded-[26px] shadow-[0_10px_35px_rgba(0,0,0,0.06)] border border-slate-200/80 dark:border-slate-800 p-4 z-40 shrink-0 transition-colors duration-200">
+      
+      <!-- Üst Başlık: Resmi Cevahir Logosu, Başlık, TR | EN, Gece Modu Butonu -->
+      <div class="flex items-center justify-between pb-2.5 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl overflow-hidden shadow-md shadow-amber-500/20 shrink-0 bg-amber-400 p-1 flex items-center justify-center">
+            <img src="public/favicon.svg" alt="Cevahir Logo" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h1 class="text-base font-bold font-heading text-slate-900 dark:text-white leading-tight">Cevahir Rehber</h1>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-black tracking-wider uppercase bg-gradient-to-r from-red-600 to-red-700 text-white shadow-xs">CEVAHİR</span>
+            </div>
+            <p class="text-[11px] text-slate-400 dark:text-slate-400 font-medium">İstanbul Cevahir AVM &bull; Akıllı Harita</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Dil Seçici -->
+          <div class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300 flex items-center gap-1 cursor-pointer select-none">
+            <span class="text-slate-900 dark:text-white font-bold">TR</span>
+            <span class="text-slate-300 dark:text-slate-600">|</span>
+            <span class="text-slate-400 dark:text-slate-400">EN</span>
+          </div>
+
+          <!-- Aydınlık / Karanlık Mod Butonu -->
+          <button id="theme-toggle-btn" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-amber-400 transition-colors" title="Karanlık / Aydınlık Mod">
+            <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Arama Çubuğu & GPS Hızlı Başlatma -->
+      <div class="flex items-center gap-1.5 my-2 shrink-0">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </div>
+          <input 
+            id="search-input"
+            type="text" 
+            placeholder="Mağaza, restoran veya hizmet ara" 
+            class="w-full pl-10 pr-9 py-2.5 text-xs sm:text-sm rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:bg-white dark:focus:bg-slate-800 transition-all shadow-inner"
+          >
+          <button id="search-clear-btn" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hidden">
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+        <button id="gps-quick-btn" class="h-10 px-2.5 rounded-2xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 flex items-center gap-1 text-xs font-bold transition-all shrink-0 shadow-sm" title="Mevcut Konumum (GPS / Giriş)">
+          <i data-lucide="crosshair" class="w-3.5 h-3.5 text-cyan-500"></i>
+          <span class="text-[11px]">GPS</span>
+        </button>
+      </div>
+
+      <!-- Kategori Filtre Butonları (Yatay Kaydırılabilir) -->
+      <div id="category-pills-row" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 shrink-0">
+        <button class="cat-pill active px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900 dark:bg-white text-white dark:text-slate-900 shrink-0 shadow-sm transition-all" data-category="all">
+          Tümü
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="fashion">
+          <span class="w-2 h-2 rounded-full bg-pink-400 shrink-0"></span>Moda
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="shoes">
+          <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>Ayakkabı &amp; Çanta
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="sports">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>Spor
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="tech">
+          <span class="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Teknoloji
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="cosmetics">
+          <span class="w-2 h-2 rounded-full bg-rose-400 shrink-0"></span>Kozmetik
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="food">
+          <span class="w-2 h-2 rounded-full bg-orange-400 shrink-0"></span>Yeme &amp; İçme
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="home">
+          <span class="w-2 h-2 rounded-full bg-purple-400 shrink-0"></span>Ev &amp; Yaşam
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="entertainment">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Eğlence
+        </button>
+        <button class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1.5 transition-all" data-category="service">
+          <span class="w-2 h-2 rounded-full bg-slate-400 shrink-0"></span>Hizmet
+        </button>
+      </div>
+
+      <!-- Hızlı İhtiyaçlar (Amenities) Yatay Çipleri: WC, Giriş-Çıkış, Revir, Güvenlik, ATM, Otopark, Mescit, Bebek Odası -->
+      <div id="amenity-chips-row" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 shrink-0">
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="wc">
+          <span>🚻</span> Tuvalet
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="entrance">
+          <span>🚪</span> Giriş-Çıkış
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="infirmary">
+          <span>🩺</span> Revir
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="info">
+          <span>🛡️</span> Güvenlik &amp; Danışma
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="atm">
+          <span>💳</span> ATM
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="carpark">
+          <span>🅿️</span> Otopark
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="prayer">
+          <span>🕌</span> Mescit
+        </button>
+        <button class="amenity-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 flex items-center gap-1 transition-all" data-amenity="baby">
+          <span>🍼</span> Bebek Odası
+        </button>
+      </div>
+
+      <!-- Segmented Tabs: Bu katta · 2 vs Tüm katlar -->
+      <div id="sidebar-tabs-container" class="bg-slate-100 dark:bg-slate-800/80 p-1 rounded-2xl flex items-center gap-1 my-2 shrink-0 border border-slate-200/50 dark:border-slate-700/50">
+        <button id="tab-this-floor" class="flex-1 py-1.5 text-xs font-bold rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all text-center">
+          Bu katta · <span id="this-floor-num">2</span>
+        </button>
+        <button id="tab-all-floors" class="flex-1 py-1.5 text-xs font-semibold rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all text-center">
+          Tüm katlar
+        </button>
+      </div>
+
+      <!-- Mağaza Kartları 3 Sütunlu Grid (cevahir-rehber.web.app düzeni) -->
+      <div id="sidebar-store-grid" class="flex-1 overflow-y-auto pr-1 grid grid-cols-3 gap-2 content-start py-1">
+        <!-- JS tarafından doldurulacak 3-sütunlu kartlar -->
+      </div>
+
+      <!-- Detaylı POI (Point of Interest) Kartı & Sol Panel Görünümü -->
+      <div id="sidebar-poi-detail" class="hidden flex-1 flex-col gap-3 overflow-y-auto pr-1 py-1 animate-in fade-in slide-in-from-right-3 duration-200">
+        <!-- Geri Butonu -->
+        <button id="poi-back-btn" class="flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors self-start py-1">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Tüm Mağazalar</span>
+        </button>
+
+        <!-- POI Kart Gövdesi -->
+        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/80 flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <div id="poi-logo" class="w-14 h-14 rounded-2xl bg-white p-2 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <h3 id="poi-name" class="text-base font-extrabold font-heading text-slate-900 dark:text-white truncate">Mağaza Adı</h3>
+              <div class="flex items-center gap-1.5 mt-1 flex-wrap">
+                <span id="poi-category" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300">Moda</span>
+                <span id="poi-floor-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">2. Kat</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Çalışma Saati & İletişim -->
+          <div class="text-xs space-y-1.5 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 text-slate-600 dark:text-slate-300">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Durum:</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Açık (10:00 - 22:00)
+              </span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Konum / Kapı:</span>
+              <span id="poi-unit-no" class="font-medium">Kapı No: 126</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Telefon:</span>
+              <span class="font-medium">0212 368 69 00</span>
+            </div>
+          </div>
+
+          <!-- Kampanya / İndirim Alanı -->
+          <div id="poi-campaign-card" class="p-3 rounded-xl bg-gradient-to-br from-amber-500/10 to-red-500/10 border border-amber-500/30 flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                <span>🏷️</span> Günün Fırsatı
+              </span>
+              <span id="poi-campaign-badge" class="px-1.5 py-0.5 rounded bg-red-600 text-white text-[9px] font-black">%20 İndirim</span>
+            </div>
+            <div id="poi-campaign-text" class="text-xs font-bold text-slate-800 dark:text-slate-100">Yeni sezon ürünlerinde geçerli indirim</div>
+            <div class="flex items-center justify-between pt-1">
+              <span id="poi-coupon-code" class="text-[11px] font-mono font-bold text-amber-700 dark:text-amber-300 bg-amber-100/80 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-300/40">CEVAHIR20</span>
+              <button id="poi-copy-coupon-btn" class="text-[11px] font-bold text-cyan-600 dark:text-cyan-400 hover:underline">Kodu Kopyala</button>
+            </div>
+          </div>
+
+          <!-- Aksiyon Butonları -->
+          <div class="flex flex-col gap-2 pt-1">
+            <button id="poi-route-btn" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white text-xs font-bold shadow-md shadow-red-600/30 hover:from-red-500 hover:to-red-600 flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="navigation" class="w-4 h-4"></i>
+              <span>Buraya Yol Tarifi Al</span>
+            </button>
+            <button id="poi-start-btn" class="w-full py-2 px-4 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-500"></i>
+              <span>Başlangıç Noktası Yap</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Aktif Turn-by-Turn Yönlendirmeleri (Eğer rota varsa burada da listelenir) -->
+        <div id="poi-sidebar-route" class="hidden flex flex-col gap-2 mt-2">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-200">
+            <span>🧭 Adım Adım Yönlendirme</span>
+            <span id="poi-route-summary" class="text-cyan-600 dark:text-cyan-400 text-[11px]">136m · ~2 dk</span>
+          </div>
+          <div id="poi-steps-list" class="space-y-1.5 max-h-48 overflow-y-auto pr-1 text-xs"></div>
+        </div>
+      </div>
+
+      <!-- Hızlı Navigasyon Barı (Bir mağaza seçildiğinde altta çıkar) -->
+      <div id="sidebar-quick-nav" class="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800 hidden flex items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-2 truncate cursor-pointer hover:opacity-80 transition-opacity" id="quick-nav-info-box">
+          <div id="quick-nav-logo" class="w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-white"></div>
+          <div class="truncate">
+            <div id="quick-nav-name" class="text-xs font-bold text-slate-900 dark:text-white truncate">Mağaza</div>
+            <div id="quick-nav-floor" class="text-[10px] text-slate-400">2. Kat</div>
+          </div>
+        </div>
+        <button id="quick-route-btn" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white text-xs font-bold shadow-md shadow-red-600/30 hover:from-red-500 hover:to-red-600 flex items-center gap-1 shrink-0 transition-all">
+          <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+          <span>Yol Tarifi</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- SAĞ ALAN: İNTERAKTİF HARİTA & YÜZEN KONTROLLER -->
+    <main class="flex-1 relative h-full rounded-[26px] overflow-hidden bg-white dark:bg-slate-950 shadow-[0_10px_35px_rgba(0,0,0,0.06)] border border-slate-200/80 dark:border-slate-800 transition-colors duration-200">
+      
+      <!-- Sol Üst Yüzen Kat Başlığı Bannerı (cevahir-rehber.web.app birebir) -->
+      <div id="floor-header-card" class="absolute top-4 left-4 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-slate-200/80 dark:border-slate-800 pointer-events-auto transition-all">
+        <h2 id="floor-title-text" class="text-base font-extrabold font-heading text-slate-900 dark:text-white leading-tight">2. Kat</h2>
+        <p id="floor-subtitle-text" class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Ana Giriş · Moda · Sinema</p>
+      </div>
+
+      <!-- İnteraktif SVG Harita Konteyneri -->
+      <div id="svg-container" class="w-full h-full relative overflow-hidden select-none"></div>
+
+      <!-- Dev Watermark Kat Numarası (Haritanın arkasında silik dev sayı) -->
+      <div id="map-watermark" class="map__watermark select-none pointer-events-none">2</div>
+
+      <!-- Sağ Dikey Kat Seçici Bar (KAT: 6, 5, 4, 3, 2, 1) -->
+      <div class="floors-pill-bar absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md py-3 px-1.5 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.08)] border border-slate-200/80 dark:border-slate-800 flex flex-col items-center gap-1.5">
+        <span class="text-[9px] font-black tracking-wider text-slate-400 uppercase py-1">KAT</span>
+        <button class="floor-pill w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-floor="6" title="6. Kat: Restoranlar &amp; Teras">6</button>
+        <button class="floor-pill w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-floor="5" title="5. Kat: Yemek Katı &amp; Eğlence">5</button>
+        <button class="floor-pill w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-floor="4" title="4. Kat: Spor &amp; Genç Moda">4</button>
+        <button class="floor-pill w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-floor="3" title="3. Kat: Moda &amp; Danışma">3</button>
+        <button class="floor-pill w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md active" data-floor="2" title="2. Kat: Ana Giriş &amp; Moda">2</button>
+        <button class="floor-pill w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-floor="1" title="1. Kat: Metro &amp; Market">1</button>
+      </div>
+
+      <!-- Sağ Alt Zoom Kontrolleri (+, -, merkezle) -->
+      <div class="zoom-bar absolute right-4 bottom-6 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-1.5 rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.08)] border border-slate-200/80 dark:border-slate-800 flex flex-col items-center gap-1">
+        <button id="zoom-in-btn" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" title="Yakınlaştır">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+        </button>
+        <button id="zoom-out-btn" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" title="Uzaklaştır">
+          <i data-lucide="minus" class="w-4 h-4"></i>
+        </button>
+        <button id="reset-view-btn" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" title="Tüm Katı Gör">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- ROTA PLANLAMA VE YÖNLENDİRME KARTI (Navigasyon Başlatıldığında Çıkar) -->
+      <div id="route-panel" class="absolute bottom-6 left-6 z-30 w-84 sm:w-96 flex flex-col gap-3 pointer-events-none transition-all duration-300">
+        
+        <!-- Rota Özeti & Simülasyon Kartı -->
+        <div id="route-info-card" class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-4 rounded-3xl pointer-events-auto border border-cyan-500/40 shadow-2xl flex flex-col gap-3 hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+          
+          <!-- Rota Başlığı & Kapatma -->
+          <div class="flex items-center justify-between pb-1 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg">
+                🛒
+              </div>
+              <div>
+                <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Cevahir Rota Rehberi</span>
+                <div id="route-floors" class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">1. Kat &rarr; 2. Kat</div>
+              </div>
+            </div>
+            <button id="clear-route-btn" class="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 flex items-center justify-center transition-colors" title="Rotayı Kapat">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Başlangıç & Hedef Noktaları (Değiştirilebilir) -->
+          <div class="flex items-center gap-2 p-2 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs">
+            <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+              <div class="flex items-center gap-1.5 truncate">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+                <span class="text-slate-400 font-medium shrink-0">Başlangıç:</span>
+                <span id="route-start-label" class="font-bold text-slate-800 dark:text-slate-200 truncate cursor-pointer hover:underline" title="Başlangıç noktasını değiştir">Metro Girişi (1. Kat)</span>
+              </div>
+              <div class="flex items-center gap-1.5 truncate">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500 shrink-0"></span>
+                <span class="text-slate-400 font-medium shrink-0">Hedef:</span>
+                <span id="route-target-label" class="font-bold text-slate-800 dark:text-slate-200 truncate">Zara (2. Kat)</span>
+              </div>
+            </div>
+            <button id="route-swap-btn" class="p-2 rounded-xl bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm transition-all" title="Başlangıç ve Hedefi Değiştir">
+              <i data-lucide="arrow-up-down" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Mesafe ve Yürüyüş Süresi -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+              <div class="text-[10px] text-slate-400 uppercase font-bold">Mesafe</div>
+              <div id="route-distance" class="text-base font-extrabold text-slate-900 dark:text-white font-heading">0 m</div>
+            </div>
+            <div class="p-2 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+              <div class="text-[10px] text-slate-400 uppercase font-bold">Yürüyüş Süresi</div>
+              <div id="route-time" class="text-base font-extrabold text-cyan-600 dark:text-cyan-400 font-heading">0 dk</div>
+            </div>
+          </div>
+
+          <!-- Kat Geçiş Modu: Yürüyen Merdiven vs Asansör -->
+          <div class="flex items-center gap-2">
+            <button id="mode-escalator" class="flex-1 py-1.5 px-2.5 rounded-xl border border-red-500 bg-red-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm">
+              <span>⚡</span>
+              <span>Yürüyen Merdiven</span>
+            </button>
+            <button id="mode-elevator" class="flex-1 py-1.5 px-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all">
+              <span>🛗</span>
+              <span>Asansör</span>
+            </button>
+          </div>
+
+          <!-- Navigasyon Modu Tercihi: Önizleme (Sepet) vs Canlı Konum (GPS) -->
+          <div class="bg-slate-100 dark:bg-slate-800/80 p-1 rounded-2xl flex items-center gap-1 border border-slate-200/60 dark:border-slate-700/60">
+            <button id="nav-mode-preview" class="flex-1 py-1.5 text-xs font-bold rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm flex items-center justify-center gap-1 transition-all">
+              <span>👁️</span>
+              <span>Rotayı Önizle</span>
+            </button>
+            <button id="nav-mode-gps" class="flex-1 py-1.5 text-xs font-semibold rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-1 transition-all">
+              <span>🧭</span>
+              <span>Konumla Git</span>
+            </button>
+          </div>
+
+          <!-- Simülatör İlerleme ve Kontrolleri -->
+          <div id="sim-controls-panel" class="pt-1 flex flex-col gap-2">
+            <!-- İlerleme Çubuğu -->
+            <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
+              <div id="sim-progress-bar" class="bg-cyan-500 h-full w-0 transition-all duration-100"></div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <button id="sim-play-btn" class="flex-1 py-2 px-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+                <span id="sim-play-text">Sepeti Başlat</span>
+              </button>
+              <button id="sim-reset-btn" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all" title="Başa Sar">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              </button>
+              <div class="flex items-center rounded-xl bg-slate-100 dark:bg-slate-800 p-0.5 border border-slate-200 dark:border-slate-700 text-xs">
+                <button id="sim-speed-1" class="px-2 py-1 rounded-lg bg-cyan-600 text-white font-bold">1x</button>
+                <button id="sim-speed-2" class="px-2 py-1 rounded-lg text-slate-600 dark:text-slate-300 font-bold hover:text-slate-900 dark:hover:text-white">2x</button>
+                <button id="sim-speed-4" class="px-2 py-1 rounded-lg text-slate-600 dark:text-slate-300 font-bold hover:text-slate-900 dark:hover:text-white">4x</button>
+              </div>
+            </div>
+
+            <!-- Adım Adım Talimatlar Çekmecesi -->
+            <details class="group mt-1">
+              <summary class="flex items-center justify-between cursor-pointer text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white list-none">
+                <span>Adım Adım Yol Tarifi</span>
+                <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform group-open:rotate-180"></i>
+              </summary>
+              <div id="route-steps-container" class="mt-2 max-h-36 overflow-y-auto space-y-1.5 pr-1 text-xs"></div>
+            </details>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- MAĞAZA DETAY, KAMPANYA & ROTA MODALI -->
+  <div id="store-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden animate-in fade-in duration-200">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-sm rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl relative flex flex-col gap-3.5 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
+      
+      <button id="modal-close-btn" class="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-white transition-all">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Mağaza Başlığı & Logo -->
+      <div class="flex items-center gap-3.5">
+        <div id="modal-store-logo-wrapper" class="w-14 h-14 rounded-2xl overflow-hidden shrink-0 shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center bg-white p-2"></div>
+        <div class="min-w-0 flex-1">
+          <h3 id="modal-store-name" class="text-base sm:text-lg font-bold font-heading text-slate-900 dark:text-white leading-tight truncate"></h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="modal-store-category" class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium"></span>
+            <span id="modal-store-floor" class="text-[11px] font-bold text-cyan-600 dark:text-cyan-400"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÇALIŞMA SAATLERİ & KONUM BİLGİSİ -->
+      <div class="space-y-1.5 py-2 border-y border-slate-100 dark:border-slate-800 text-xs">
+        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+          <span>Çalışma Saatleri:</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-bold">Açık &bull; 10:00 - 22:00</span>
+        </div>
+        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+          <span>Konum:</span>
+          <span id="modal-store-loc" class="text-slate-700 dark:text-slate-200 font-medium">İstanbul Cevahir AVM</span>
+        </div>
+      </div>
+
+      <!-- GÜNLÜK / SAATLİK KAMPANYA & İNDİRİM KARTI (Kullanıcı İsteği) -->
+      <div id="modal-campaign-card" class="p-3 rounded-2xl bg-gradient-to-br from-amber-500/10 via-rose-500/10 to-orange-500/10 border border-amber-500/30 flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <span id="modal-campaign-badge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500 text-white flex items-center gap-1 shadow-sm">
+            ⏰ Flaş Fırsat
+          </span>
+          <span id="modal-campaign-expires" class="text-[10px] font-semibold text-rose-600 dark:text-rose-400">
+            Bugün Geçerli
+          </span>
+        </div>
+        <div id="modal-campaign-title" class="text-xs font-bold text-slate-900 dark:text-white">Saatlik Flaş İndirim</div>
+        <div class="flex items-center justify-between mt-0.5">
+          <span id="modal-campaign-discount" class="text-sm font-black text-rose-600 dark:text-rose-400 font-heading">%30 İndirim</span>
+          <button id="modal-campaign-code-btn" class="text-[10px] font-mono px-2 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-100 flex items-center gap-1" title="Kodu Kopyala">
+            <span id="modal-campaign-code">KOD: CEVAHIR30</span>
+            <i data-lucide="copy" class="w-3 h-3"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- BAŞLANGIÇ & HEDEF SEÇİMİ (Kullanıcı İsteği) -->
+      <div class="grid grid-cols-2 gap-2 pt-1">
+        <button id="modal-set-start-btn" class="py-2 px-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Buradan Başla</span>
+        </button>
+        <button id="modal-set-target-btn" class="py-2 px-2.5 rounded-xl bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-500"></span>
+          <span>Hedef Seç</span>
+        </button>
+      </div>
+
+      <!-- ÖNİZLEME VEYA KONUMLA GİTME SEÇENEĞİ (Kullanıcı İsteği) -->
+      <div class="grid grid-cols-2 gap-2">
+        <button id="modal-preview-btn" class="py-2.5 px-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+          <span>🛒</span>
+          <span>Rotayı Önizle</span>
+        </button>
+        <button id="modal-start-nav-btn" class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white text-xs font-bold transition-all shadow-md shadow-red-600/30 flex items-center justify-center gap-1.5">
+          <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+          <span>Konumla Git</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KONUM SEÇİCİ / GPS BAŞLANGIÇ NOKTASI MODALI -->
+  <div id="location-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden animate-in fade-in duration-200">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-sm rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl relative flex flex-col gap-4 animate-in zoom-in-95 duration-200">
+      
+      <button id="location-modal-close" class="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-white transition-all">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div>
+        <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white">Başlangıç Konumunuzu Belirleyin</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Rotanızın nereden başlayacağını seçin veya GPS ile algılayın.</p>
+      </div>
+
+      <!-- Otomatik GPS Butonu -->
+      <button id="loc-btn-gps" class="p-3 rounded-2xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-bold text-xs flex items-center justify-between transition-all">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="crosshair" class="w-4 h-4 text-cyan-500 animate-pulse"></i>
+          <span>Cihaz Konumumu Algıla (GPS)</span>
+        </div>
+        <span class="text-[10px] bg-cyan-500 text-white px-2 py-0.5 rounded-full">Otomatik</span>
+      </button>
+
+      <!-- Popüler AVM Girişleri -->
+      <div class="flex flex-col gap-1.5 text-xs">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Cevahir Giriş Kapıları</span>
+        <button class="loc-entrance-btn p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between text-left transition-all" data-entrance-id="entrance101" data-floor="1">
+          <div class="flex items-center gap-2">
+            <span>🚇</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Giriş · Metro</span>
+          </div>
+          <span class="text-[10px] text-slate-400">1. Kat</span>
+        </button>
+        <button class="loc-entrance-btn p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between text-left transition-all" data-entrance-id="entrance201" data-floor="2">
+          <div class="flex items-center gap-2">
+            <span>🚪</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Giriş · Büyükdere Cad. (Ana Giriş)</span>
+          </div>
+          <span class="text-[10px] text-slate-400">2. Kat</span>
+        </button>
+        <button class="loc-entrance-btn p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between text-left transition-all" data-entrance-id="entrance202" data-floor="2">
+          <div class="flex items-center gap-2">
+            <span>🚪</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Giriş · Aytekin Kotil Cad.</span>
+          </div>
+          <span class="text-[10px] text-slate-400">2. Kat</span>
+        </button>
+        <button class="loc-entrance-btn p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between text-left transition-all" data-entrance-id="entrance102" data-floor="1">
+          <div class="flex items-center gap-2">
+            <span>🚪</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Giriş · Özpolat Sitesi</span>
+          </div>
+          <span class="text-[10px] text-slate-400">1. Kat</span>
+        </button>
+        <button class="loc-entrance-btn p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between text-left transition-all" data-entrance-id="carpark102" data-floor="1">
+          <div class="flex items-center gap-2">
+            <span>🅿️</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Otopark Girişi</span>
+          </div>
+          <span class="text-[10px] text-slate-400">1. Kat</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Arama Sonuçları Dropdown (Arama Çubuğunun Altında Açılır) -->
+  <div id="search-dropdown" class="fixed z-50 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 max-h-80 overflow-y-auto hidden shadow-2xl p-2 w-[340px]"></div>
+
+  <!-- Modern Noir Toast Notification / Snackbar Container -->
+  <div id="toast-container" class="fixed top-5 right-5 sm:right-6 z-50 flex flex-col gap-2.5 pointer-events-none max-w-sm w-full"></div>
+
+  <!-- Yüklenen Scriptler -->
+  <script src="js/logos.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Lucide ikonlarını başlat
+    lucide.createIcons();
+  </script>
+</body>
+</html>

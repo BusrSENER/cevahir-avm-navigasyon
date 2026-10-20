@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 516 735" width="100%" height="100%" class="map__svg">
+  <defs>
+    <filter id="slab-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Base Slab Background / Corridors -->
+  <g id="FloorSlab" class="map__slab">
+    <path id="path3342" class="slab corridor-path" d="M436.4 26.8L371.6 27.6L371.7 33.8L334.9 70.7L328.2 70.8L328.4 90.1L302.3 90.4L302.5 109.5L277.6 133.1L262.7 133L262.3 118.7L273.1 118.2L288.7 99L288.2 80.8L288.1 66.3L270.6 49.2L261.6 49.3L261.7 52.3L245.2 52.5L245.1 49.2L236.1 49.3L218.8 67L219 81.8L218 99L237.2 119.1L246.3 119.6L245.4 133.3L229.3 133.7L211 114.6L210.9 89.7L178.6 90.1L178.4 73.2L171.1 73.3L133.7 36.8L133.7 30.5L68.9 31.2L44.9 55.8L46.5 189.5L37.2 189.6L37.4 202.9L46 202.8L46.1 207.4L25.5 228.5L26.5 315.6L47.1 335.8L47.2 342L38.9 342.1L39.1 355.3L47.4 355.2L47.4 360.3L38.9 369.1L40 470.7L60.1 490.4L60.2 495.4L51.9 495.5L52.1 508.5L59.6 508.4L59.6 510.9L68.3 510.8L68.7 545.3L293.2 542.7L293 521.1L444.7 519.4L444.5 507.4L456.6 507.2L456.5 504.1L464.8 504L464.7 489.8L456.6 489.9L456.6 484.5L475 465.7L473.9 365.1L466 357.4L465.9 351L473.5 350.9L473.4 337.5L465.2 337.6L465.1 332.4L486 311L485 223.5L463.6 202.8L463.6 197.8L471.8 197.7L471.7 184.3L464.7 184.4L464.6 177.5L472.3 169.7L471.5 101.7L461.4 92.3L460.9 51.3L436.4 26.8ZM270.4 143.2L280.2 153.1L280.9 166.4L272.1 177L238.7 177.6L229.3 167.9L228.1 153.9L238.1 144.7L270.4 143.2ZM263 271.7L278.3 286L277.8 305.4L309.3 336.3L303.6 341.2L303.4 360.9L278.7 386.4L279.1 403.4L264.7 418.2L251.2 418.8L235.5 404.5L234.8 375.1L231.1 371.3L226.2 376.9L205.1 357.5L204.2 336.9L247.6 292.4L247.7 272.2L263 271.7Z" fillRule="evenodd" />
+  </g>
+  <g id="FloorVoids">
+    <path id="path3343" class="void" d="M92.3 184.8L92.3 187.9L96.2 187.8L96.1 182.9L106.7 182.7L106.8 187.7L111.6 187.6L111.5 170.5L111.5 163.4L92 163.6Z" fillRule="evenodd" />
+    <path id="path3413" class="void" d="M135.7 495.5L143.3 495.4L143.3 491.5L152.5 491.4L152.5 495.7L158.2 495.6L157.9 465.9L139.8 466.1L139.9 473.5L135.5 473.6Z" fillRule="evenodd" />
+    <path id="path3353" class="void" d="M417.2 180.8L417.2 184.3L412.6 184.4L412.5 179.3L403 179.4L403 184.2L397.6 184.2L397.2 167.6L397.1 159.8L416.9 159.6Z" fillRule="evenodd" />
+  </g>
+  <g id="FloorCores">
+    <path id="path3347" class="room-wall" d="M122.6 184.4L111.6 184.5L111.5 170.5L122.3 170.4Z" fillRule="evenodd" />
+    <path id="path3349" class="room-wall" d="M119.3 170.4L136.4 170.2L136.2 159.6L119.2 159.8Z" fillRule="evenodd" />
+    <path id="path496" class="room-wall" d="M347.4 439.7L352.3 440L352.5 460.3L373 460.1L373.3 485.6L341.8 485.7L341.5 459.9L347.7 459.9Z" fillRule="evenodd" />
+    <path id="path1328" class="room-wall" d="M168.1 482.1L158 482.1L157.9 465.9L167.9 465.8Z" fillRule="evenodd" />
+    <path id="path1328-7" class="room-wall" d="M135.5 473.6L135.7 489.1L60.1 490.4L40 470.7L40 468.7L139.8 466.1L139.9 473.5Z" fillRule="evenodd" />
+    <path id="ID342" class="room-wall" d="M244.5 421.7L235.9 414L239.7 409.7L248.3 417.4Z" fillRule="evenodd" />
+    <path id="ID341" class="room-wall" d="M245 468.3L244.8 456.8L250.5 456.7L250.7 468.2Z" fillRule="evenodd" />
+  </g>
+  <g id="FloorRooms">
+    <path id="ID305" class="room room--shop room--tenant g-cocuk cat-cocuk store-polygon" d="M46.1 207.4L48.5 205L79.4 204.6L84.3 200.8L198.3 199.7L198.7 225.3L157.4 225.8L157.7 252.3L25.8 253.8L25.5 228.5Z" fillRule="evenodd" data-id="ID305" />
+    <path id="ID303" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M198.5 252L157.7 252.3L157.4 225.8L198.7 225.3L198.3 199.7L223.1 199.5L228.3 204.6L228.8 248.7L225.8 251.8Z" fillRule="evenodd" data-id="ID303" />
+    <path id="ID335" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M385.4 182.5L303.2 182.9L281.7 204.6L282.2 246.6L286.8 251.1L398.7 249.9L402.4 246L401.7 203.5Z" fillRule="evenodd" data-id="ID335" />
+    <path id="ID334" class="room room--shop room--vacant store-polygon" d="M463.6 200.6L429 201L424.9 197L416.3 197.1L413 200.5L413.7 267.8L485.5 267L485 223.5L463.6 202.8Z" fillRule="evenodd" data-id="ID334" />
+    <path id="ID333" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M485.5 267L413.7 267.8L413.9 333.2L418 337.3L428.1 337.1L431.2 334L465.1 333.5L465.1 332.4L486 311L485.5 267Z" fillRule="evenodd" data-id="ID333" />
+    <path id="ID324" class="room room--shop room--tenant g-cocuk cat-cocuk store-polygon" d="M466 353.5L430.4 353.9L428.1 351.6L417.9 351.8L414.4 355.3L414.9 400.8L398.6 417.4L398.9 439.5L404.8 442.8L405.4 489.3L399.7 492.6L400.1 519.9L444.7 519.4L444.5 507.4L436.1 507.5L435.8 487.1L456.6 486.9L456.6 484.5L475 465.7L473.9 365.1L466 357.4Z" fillRule="evenodd" data-id="ID324" />
+    <path id="ID323" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M398.9 439.5L387.4 439.6L387.7 466.4L405.1 466.2L404.8 442.8Z" fillRule="evenodd" data-id="ID323" />
+    <path id="ID322" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M387.4 439.6L352.3 440L352.5 460.3L373 460.1L373.7 520.2L400.1 519.9L399.7 492.6L405.4 489.3L405.1 466.2L387.7 466.4Z" fillRule="evenodd" data-id="ID322" />
+    <path id="ID321" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M347.4 439.7L347.7 459.9L341.5 459.9L341.8 485.7L312.4 486.1L311.9 440.3Z" fillRule="evenodd" data-id="ID321" />
+    <path id="ID320" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M311.9 440.3L288.2 440.6L284.2 444.7L284.4 465.7L312.2 465.4Z" fillRule="evenodd" data-id="ID320" />
+    <path id="ID318" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M284.8 486.4L285.1 505.8L296.7 521.1L373.7 520.2L373.3 485.6Z" fillRule="evenodd" data-id="ID318" />
+    <path id="ID326" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M377.3 351.7L377.3 351.7L377.3 351.7L358.4 369.4L353.8 369.4L313.5 369.9L299.9 383.8L300.3 421.9L304.6 426.1L354.4 425.3L376.9 424.8Z" fillRule="evenodd" data-id="ID326" />
+    <path id="ID329" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M375.1 292.3L402.9 292L403.4 333.2L399.5 337.1L376.1 337.4L374.1 335.4L376.5 333.9Z" fillRule="evenodd" data-id="ID329" />
+    <path id="ID331" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M374.1 335.4L357.9 319.5L353.4 319.6L352.8 265.3L374.8 264.3L375.1 292.3L376.5 333.9Z" fillRule="evenodd" data-id="ID331" />
+    <path id="ID332" class="room room--shop room--tenant g-aksesuar cat-aksesuar store-polygon" d="M353.4 319.6L313.9 320L300.4 306.8L300 269.1L303.6 265.4L352.8 265.3Z" fillRule="evenodd" data-id="ID332" />
+    <path id="ID317" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M293 521.1L285.3 512.2L245.2 512.6L245.5 543.3L293.2 542.7Z" fillRule="evenodd" data-id="ID317" />
+    <path id="ID328" class="room room--shop room--tenant g-kozmetik cat-kozmetik store-polygon" d="M329 332.3L329.1 347.4L345.3 347.2L345.1 332.1Z" fillRule="evenodd" data-id="ID328" />
+    <path id="ID307" class="room room--shop room--tenant g-cocuk cat-cocuk store-polygon" d="M94.6 294.7L117.4 294.5L117.4 298.5L126.2 298.4L126.4 315.4L136.4 315.2L136.5 322.7L192 322.1L192.4 359.9L183.4 360L183.3 352.7L169.3 352.9L169.2 340.4L158.4 340.5L158.5 347.5L73.8 348.4L73.6 338.2L47.1 338.5L47.1 335.8L26.5 315.6L26.3 295.5Z" fillRule="evenodd" data-id="ID307" />
+    <path id="ID313" class="room room--shop room--tenant g-cocuk cat-cocuk store-polygon" d="M137.9 355.8L111.7 356.1L108.7 359.2L99.4 359.3L95.4 355.4L84 355.6L82.9 357.5L47.4 357.9L47.4 360.3L38.9 369.1L40 468.7L40 468.7L139.8 466.1L139.8 466.1L139.8 466.1L139.4 429.3L136.1 429.4L135.3 358.4Z" fillRule="evenodd" data-id="ID313" />
+    <path id="ID312" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M137.9 355.8L140.4 354.3L158 371.5L159.9 371.5L160.4 429.1L139.4 429.3L136.1 429.4L135.3 358.4Z" fillRule="evenodd" data-id="ID312" />
+    <path id="ID311" class="room room--shop room--tenant g-ayakkabi cat-ayakkabi store-polygon" d="M160.2 401.3L216.3 400.7L216.5 423.7L211.5 428.8L160.4 429.1Z" fillRule="evenodd" data-id="ID311" />
+    <path id="ID315" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M183.8 489.8L183.8 494.8L225.2 494.3L230.8 488.6L230.3 445.1L227 441.9L183.2 442.5Z" fillRule="evenodd" data-id="ID315" />
+    <path id="ID316" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M245.5 543.3L245.2 512.6L230.6 512.8L224.1 504.7L93.3 506.1L87.6 511.9L68.4 512.1L68.7 545.3Z" fillRule="evenodd" data-id="ID316" />
+    <path id="ID306" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M25.8 253.8L94.2 253.1L94.6 294.7L26.3 295.5Z" fillRule="evenodd" data-id="ID306" />
+    <path id="ID337" class="room room--shop room--tenant g-kozmetik cat-kozmetik store-polygon" d="M210.9 89.7L211 114.6L177.6 115L178.6 90.1Z" fillRule="evenodd" data-id="ID337" />
+    <path id="ID338" class="room room--shop room--vacant store-polygon" d="M265.2 177.1L265.6 186.7L248.6 187.2L248.2 177.4Z" fillRule="evenodd" data-id="ID338" />
+    <path id="ID336" class="room room--shop room--tenant g-cocuk cat-cocuk store-polygon" d="M302.3 90.4L303.2 170.4L357.3 169.8L357.7 182.7L385.4 182.5L385.7 168L397.2 167.6L397.1 159.8L416.9 159.6L417.2 180.8L464.6 180.3L464.6 177.5L472.3 169.7L471.5 101.7L461.4 92.3L460.9 51.3L436.4 26.8L371.6 27.6L371.7 33.8L334.9 70.7L328.2 70.8L328.4 90.1Z" fillRule="evenodd" data-id="ID336" />
+    <path id="ID339" class="room room--shop room--vacant store-polygon" d="M264.3 262.1L264.8 271.7L247.7 272.2L247.3 262.4Z" fillRule="evenodd" data-id="ID339" />
+    <path id="ID314" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M157.9 465.9L157.9 465.9L183.5 465.4L183.5 465.4L183.5 465.4L183.5 465.4L183.2 442.5L139.6 443L139.8 466.1Z" fillRule="evenodd" data-id="ID314" />
+    <path id="ID310A" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M159.9 371.5L201.3 371L211 380.3L179.8 380.8L179.4 401.1L160.2 401.3Z" fillRule="evenodd" data-id="ID310A" />
+    <path id="ID301" class="room room--shop room--tenant g-cocuk cat-cocuk store-polygon" d="M178.6 92L177.6 115L196.5 114.7L197.1 136.6L188.7 145.2L188.8 156.9L174.1 171.9L151.5 172.2L138.6 159.6L119.2 159.8L119.3 170.4L111.5 170.5L111.5 163.4L92 163.6L92.3 184.8L46.4 185.4L44.9 55.8L68.9 31.2L133.7 30.5L133.7 36.8L171.1 73.3L178.4 73.2Z" fillRule="evenodd" data-id="ID301" />
+    <path id="ID330" class="room room--shop room--vacant store-polygon" d="M402.9 268L398.8 264L374.8 264.3L375.1 292.3L402.9 292Z" fillRule="evenodd" data-id="ID330" />
+    <path id="ID319" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M312.2 465.4L312.4 486.1L284.8 486.4L284.4 465.7Z" fillRule="evenodd" data-id="ID319" />
+    <path id="ID302" class="room room--shop room--tenant g-aksesuar cat-aksesuar store-polygon" d="M122.3 170.4L122.7 186.8L137.4 186.6L139.8 184.2L139.7 173.7L137.6 170.2Z" fillRule="evenodd" data-id="ID302" />
+    <path id="ID309" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M224.6 266.4L135.8 267.4L112.8 267.5L108.4 272.1L108.6 294.6L117.4 294.5L117.4 298.5L126.2 298.4L126.4 315.4L136.4 315.2L136.5 322.7L192 322.1L199 322L228.7 291.6L228.5 270.2L224.6 266.4Z" fillRule="evenodd" data-id="ID309" />
+    <path id="ID310B" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M216.1 385.4L216.3 400.7L179.4 401.1L179.8 380.8L211 380.3Z" fillRule="evenodd" data-id="ID310B" />
+    <path id="ID325" class="room room--shop room--tenant g-moda cat-moda store-polygon" d="M401.9 351.4L377.3 351.7L376.9 424.8L379.6 424.7L404.1 399.7Z" fillRule="evenodd" data-id="ID325" />
+  </g>
+  <g id="FloorIcons" class="pointer-events-none">
+    <g transform="translate(224.7, 116.9)" class="portal-svg portal-escalator" opacity="0.85">
+      <circle r="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.2"/>
+      <path d="M-3 2 L3 -2 M1 -2 L3 -2 L3 0" stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(283.6, 117)" class="portal-svg portal-escalator" opacity="0.85">
+      <circle r="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.2"/>
+      <path d="M-3 2 L3 -2 M1 -2 L3 -2 L3 0" stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(253.5, 230.9)" class="portal-svg portal-escalator" opacity="0.85">
+      <circle r="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.2"/>
+      <path d="M-3 2 L3 -2 M1 -2 L3 -2 L3 0" stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(260.8, 469.1)" class="portal-svg portal-escalator" opacity="0.85">
+      <circle r="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.2"/>
+      <path d="M-3 2 L3 -2 M1 -2 L3 -2 L3 0" stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(61.3, 500.9)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(455.3, 496.7)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(463.5, 344.1)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(463.4, 189.6)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(47.6, 195.9)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(45.3, 348.3)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(259.5, 419.4)" class="portal-svg portal-elevator" opacity="0.9">
+      <rect x="-6" y="-6" width="12" height="12" rx="3" fill="#0284c7" fill-opacity="0.2" stroke="#0284c7" stroke-width="1.2"/>
+      <path d="M-2 -3 L0 -5 L2 -3 M-2 3 L0 5 L2 3" stroke="#0284c7" stroke-width="1" stroke-linecap="round" fill="none"/>
+    </g>
+    <g transform="translate(227.4, 371.1)" class="portal-svg portal-escalator" opacity="0.85">
+      <circle r="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.2"/>
+      <path d="M-3 2 L3 -2 M1 -2 L3 -2 L3 0" stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(303.2, 339.1)" class="portal-svg portal-escalator" opacity="0.85">
+      <circle r="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.2"/>
+      <path d="M-3 2 L3 -2 M1 -2 L3 -2 L3 0" stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <g transform="translate(254.4, 125.6)" class="portal-svg portal-stairs" opacity="0.6">
+      <path d="M-4 3 H-1 V0 H2 V-3 H4" stroke="#64748b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+  </g>
+</svg>
